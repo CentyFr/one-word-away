@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One Word Away</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2B33E0;--ink:#12103A;--paper:#F4F2FF;--pink:#FF4F8B;--yel:#FFD23F;--mint:#35E8A8;--lilac:#CFCBFF;--disp:"Bricolage Grotesque","Arial Black",system-ui,sans-serif}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--blue)}
+body{margin:0;min-height:100vh;background:var(--blue);color:#fff;font:500 16px/1.5 Figtree,system-ui,-apple-system,Segoe UI,sans-serif;position:relative;overflow-x:hidden}
+body::before,body::after{content:"";position:fixed;border-radius:50%;z-index:0;pointer-events:none}
+body::before{width:380px;height:380px;background:#3A44F0;top:-150px;right:-130px}
+body::after{width:300px;height:300px;background:#2129B4;bottom:-120px;left:-110px}
+.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:28px 16px 56px}
+.brand{font:800 clamp(34px,9.5vw,48px)/1 var(--disp);letter-spacing:-.025em;color:var(--yel);text-shadow:3px 3px 0 var(--ink);margin:0}
+.sub{margin:8px 0 22px;color:rgba(255,255,255,.88)}
+.prog{display:flex;gap:8px;margin-bottom:18px}.prog i{flex:1;height:14px;border:3px solid var(--ink);border-radius:99px;background:rgba(255,255,255,.22)}.prog i.on{background:var(--yel)}
+.card{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 var(--ink);padding:22px;margin-bottom:18px}
+.mute{font-size:14px;opacity:.7}.note{color:rgba(255,255,255,.88);font-size:15px;margin:0 0 6px}
+.q{font:800 clamp(28px,7.4vw,38px)/1.3 var(--disp);letter-spacing:-.02em;margin:8px 0 22px;overflow-wrap:anywhere}
+.q input{display:inline-block;width:7ch;max-width:100%;font:inherit;color:var(--ink);background:var(--yel);border:0;border-bottom:4px solid var(--ink);border-radius:10px 10px 0 0;padding:0 6px;margin:0 2px;text-align:center;outline:none}
+.q input:focus{background:#FFF0A8;box-shadow:0 0 0 3px var(--pink)}
+.q input::placeholder{color:rgba(18,16,58,.35)}
+.field{width:100%;font:700 18px Figtree,sans-serif;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:12px;padding:12px 14px;outline:none}
+.field:focus{box-shadow:0 0 0 3px var(--pink)}
+.btn{display:block;width:100%;margin-top:14px;font:800 18px var(--disp);color:var(--ink);background:var(--pink);border:3px solid var(--ink);border-radius:14px;padding:14px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn.alt{background:var(--paper)}.btn.ghost{background:transparent;color:#fff;border-color:#fff;box-shadow:none}.btn:disabled{opacity:.55;cursor:default}
+.btn:focus-visible{outline:3px solid var(--yel);outline-offset:3px}
+.err{min-height:22px;margin-top:8px;font-weight:700;color:#C2185B}.err.ok{color:#0B7A55}
+.res{display:flex;align-items:center;gap:18px;margin:14px 0 18px}
+.sticker{flex:none;width:104px;height:104px;border-radius:50%;background:var(--yel);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);display:grid;place-items:center;text-align:center;transform:rotate(-7deg);font:800 42px/1 var(--disp)}
+.sticker small{display:block;font:700 13px Figtree,sans-serif;margin-top:2px}
+.res p{margin:0;font-size:18px;font-weight:700;line-height:1.35}.res b{font-family:var(--disp);font-weight:800}
+.tag{display:inline-block;margin-top:8px;background:var(--mint);border:3px solid var(--ink);border-radius:99px;padding:2px 12px;font:800 14px var(--disp)}
+.row{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;height:48px;margin:9px 0;padding:0 12px;border:3px solid var(--ink);border-radius:12px;background:#fff;overflow:hidden;font-weight:700}
+.row .fill{position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--lilac);transform-origin:left;animation:grow .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d)}
+.row.me .fill{background:var(--yel)}.row.me{box-shadow:3px 3px 0 var(--ink)}
+.row span{position:relative;display:flex;align-items:center;gap:10px}.row .pc{font:800 17px var(--disp)}
+.rk{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font:800 13px var(--disp)}
+@keyframes grow{from{transform:scaleX(0)}}
+.total{font:800 clamp(76px,24vw,116px)/.9 var(--disp);letter-spacing:-.04em;margin:6px 0 0}.total small{font-size:.32em;letter-spacing:0;opacity:.6}
+.title{font:800 24px/1.2 var(--disp);margin:8px 0 18px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
+.stat{background:#fff;border:3px solid var(--ink);border-radius:14px;padding:12px}.stat b{display:block;font:800 30px/1.1 var(--disp)}.stat span{font-size:13px;line-height:1.3;display:block;margin-top:2px}
+.tile{border:3px solid var(--ink);border-radius:16px;padding:14px 16px;margin:14px 0;box-shadow:4px 4px 0 var(--ink)}
+.tile.g{background:var(--mint)}.tile.y{background:var(--yel)}.tile.w{background:#fff}
+.tile p{margin:0 0 8px;font:700 18px/1.3 var(--disp)}.tile .m{display:flex;justify-content:space-between;font-weight:700;font-size:15px}.tile .mute{margin-top:4px;opacity:.75}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1 class="brand">One Word Away</h1>
+<p class="sub" id="sub">Loading today’s puzzle…</p>
+<div id="app"></div>
+</div>
+<script>
+const DAY=864e5,$=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+const cid=ls("owa_cid")||(()=>{const c=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Math.random()).slice(2)+Date.now();ls("owa_cid",c);return c})();
+const post=(url,b)=>fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});
+let Q=[],dayN=0,dateKey="",st,step,tm;
+
+async function init(){
+  try{const j=await(await fetch("/api/today")).json();Q=j.qs;dayN=j.n;dateKey=j.date}
+  catch(e){$("#sub").textContent="";$("#app").innerHTML='<div class="card"><b>Can’t reach the game server.</b><br>Run <b>node server.js</b> in the project folder, then refresh this page.</div>';return}
+  st=ls("owa_state");if(!st||st.day!==dateKey)st={day:dateKey,res:[]};
+  step=st.res.length;$("#sub").textContent="Puzzle #"+dayN+". Fill the blank with the word most people would pick.";
+  step>=3?showFinal():showQ(step);
+}
+const prog=n=>`<div class="prog">${[0,1,2].map(k=>`<i class="${k<n?"on":""}"></i>`).join("")}</div>`;
+const sentence=(i,w)=>{const p=Q[i].split("___");return esc(p[0])+w+esc(p[1]||"")};
+
+async function submit(i){
+  const inp=$("#w"),err=$("#err"),raw=inp.value.trim().toLowerCase();
+  if(!/^[a-z’'-]{2,20}$/.test(raw)){err.textContent="Use one word, 2–20 letters, no numbers or spaces.";return}
+  $("#go").disabled=inp.disabled=true;
+  try{const r=await post("/api/answer",{cid,i,w:raw});if(!r.ok)throw 0;st.res[i]=await r.json();ls("owa_state",st);showReveal(i)}
+  catch(e){$("#go").disabled=inp.disabled=false;err.textContent="Couldn’t reach the server. Check that it’s running, then try again."}
+}
+
+function showQ(i){
+  $("#app").innerHTML=prog(i+1)+`<div class="card"><div class="mute">Sentence ${i+1} of 3</div>
+  <p class="q">${sentence(i,'<input id="w" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Your word" placeholder="word">')}</p>
+  <div class="err" id="err"></div><button class="btn" id="go">Lock in answer</button></div>
+  <p class="note">Match the crowd to score high. A word nobody else picks earns a Unique bonus.</p>
+  <button class="btn ghost" id="sg">Suggest a sentence</button>`;
+  const w=$("#w");w.oninput=()=>{w.style.width=Math.max(7,w.value.length+1)+"ch"};
+  $("#go").onclick=()=>submit(i);w.onkeydown=e=>{if(e.key==="Enter")submit(i)};$("#sg").onclick=()=>showSuggest(()=>showQ(i));w.focus();
+}
+
+function showReveal(i){
+  const r=st.res[i],inTop=r.top.some(t=>t.n===r.n);
+  const row=(d,p,me,k,idx)=>`<div class="row${me?" me":""}" style="--w:${p}%;--d:${idx*90}ms"><div class="fill"></div><span><b class="rk">${k}</b>${esc(d)}${me?" (you)":""}</span><span class="pc">${p}%</span></div>`;
+  const rows=r.top.map((t,k)=>row(t.d,t.p,t.n===r.n,k+1,k)).join("")+(inTop?"":row(r.w,r.mine,true,"•",r.top.length));
+  $("#app").innerHTML=prog(i+1)+`<div class="card"><div class="mute">${sentence(i,"<b>"+esc(r.w)+"</b>")}</div>
+  <div class="res"><div class="sticker"><div>${r.score}<small>of 100</small></div></div>
+  <div><p>You scored as well as or better than <b>${r.pct}%</b> of answers.</p>${r.rank?"":`<span class="tag">Only you said this</span>`}</div></div>
+  ${rows}<div class="mute" style="margin-top:10px">${r.rank?"Ranked #"+r.rank+". ":""}Based on ${r.real} player${r.real===1?"":"s"}${r.sd?" plus a starter pool":""}${r.real===1&&!r.sd?". You’re the first to answer this one!":"."}</div>
+  <button class="btn" id="nx">${i<2?"Next sentence":"See my results"}</button></div>`;
+  $("#nx").onclick=()=>{step=i+1;step<3?showQ(step):showFinal()};$("#nx").focus();
+}
+
+function showSuggest(back){
+  $("#app").innerHTML=`<div class="card"><p class="q" style="font-size:26px;margin-top:0">Suggest a sentence</p>
+  <p>Write a sentence with <b>___</b> where the missing word goes. Keep it open but clear, like “Every road trip needs good ___.” We review every suggestion before it goes live.</p>
+  <input class="field" id="sg" maxlength="90" placeholder="The best part of summer is ___.">
+  <div class="err" id="err"></div><button class="btn" id="sn">Send suggestion</button><button class="btn alt" id="bk">Back to the game</button></div>`;
+  $("#bk").onclick=back;
+  $("#sn").onclick=async()=>{const e=$("#err");e.className="err";e.textContent="";
+    try{const r=await post("/api/suggest",{text:$("#sg").value}),j=await r.json();
+      if(r.ok){e.className="err ok";e.textContent="Sent. Your suggestion is in the review queue.";$("#sg").value=""}else e.textContent=j.error||"Something went wrong. Try again."}
+    catch(x){e.textContent="Couldn’t reach the server. Check that it’s running."}};
+  $("#sg").focus();
+}
+
+function showFinal(){
+  const R=st.res,total=R.reduce((a,r)=>a+r.score,0),avg=Math.round(R.reduce((a,r)=>a+r.pct,0)/3);
+  let sk=ls("owa_streak")||{last:"",n:0};
+  if(sk.last!==dateKey){const y=new Date(Date.parse(dateKey)-DAY).toISOString().slice(0,10);sk={last:dateKey,n:sk.last===y?sk.n+1:1};ls("owa_streak",sk)}
+  const cls=r=>r.score>=70?"g":r.score>=40?"y":"w",sq=r=>r.score>=70?"🟩":r.score>=40?"🟨":"⬜";
+  const share=`One Word Away #${dayN}\n${R.map(sq).join("")} ${total}/300\nAs good as or better than ${avg}% of answers 🔥${sk.n}`;
+  const title=R[2].x||(total>=240?"Mind reader":total>=170?"In sync with the crowd":total>=100?"Charmingly different":"Bold independent thinker");
+  $("#app").innerHTML=prog(3)+`<div class="card"><div class="mute">Today’s score</div>
+  <div class="total">${total}<small>/300</small></div><div class="title">${esc(title)}</div>
+  <div class="stats"><div class="stat"><b>${avg}%</b><span>As good as or better than this share of answers</span></div><div class="stat"><b>${sk.n}</b><span>Day streak</span></div></div>
+  ${R.map((r,i)=>`<div class="tile ${cls(r)}"><p>${sentence(i,"“"+esc(r.w)+"”")}</p>
+   <div class="m"><span>${r.score} pts${r.rank?", rank #"+r.rank:", unique"}</span><span>≥ ${r.pct}%</span></div>
+   <div class="mute">Top answer: ${esc(r.top[0].d)} (${r.top[0].p}%)</div></div>`).join("")}
+  <button class="btn" id="sh">Copy result</button><button class="btn alt" id="sg">Suggest a sentence</button>
+  <p class="mute" style="margin:16px 0 0">Next puzzle in <b id="cd"></b></p></div>
+  <textarea id="ta" style="position:absolute;left:-9999px" aria-hidden="true"></textarea>`;
+  $("#sh").onclick=async()=>{let ok=false;try{await navigator.clipboard.writeText(share);ok=true}catch(e){try{const t=$("#ta");t.value=share;t.select();ok=document.execCommand("copy")}catch(e2){}}
+    $("#sh").textContent=ok?"Copied":"Copy failed. Select and copy manually."};
+  $("#sg").onclick=()=>showSuggest(showFinal);
+  const tick=()=>{const n=new Date(),d=Math.max(0,Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate()+1)-Date.now()),p=x=>String(x).padStart(2,"0"),el=$("#cd");
+    if(el)el.textContent=p(Math.floor(d/36e5))+":"+p(Math.floor(d/6e4)%60)+":"+p(Math.floor(d/1e3)%60)};tick();clearInterval(tm);tm=setInterval(tick,1000);
+}
+init();
+</script>
+</body>
+</html>

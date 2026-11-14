@@ -1,0 +1,4 @@
+# Approved sentences, one per line. Copy good ones here from suggestions.txt.
+# Optional starter answers after a bar, for example:
+# The best part of summer is ___. | sunshine beach vacation holiday
+# Lines starting with # are ignored. New sentences are used on days not yet scheduled.
